@@ -30,7 +30,20 @@ class Queue {
   }
 
   //Remove items from the queue
-  dequeue() {}
+  dequeue() {
+    if (this.first === null) {
+      console.log("Queue is empty");
+    }
+    let node = this.first;
+    this.first = this.first.next;
+
+    //If last item in queue
+    if (node === this.last) {
+      this.last = null;
+    }
+    this.size--;
+    return node.value;
+  }
 }
 
 module.exports = Queue;
