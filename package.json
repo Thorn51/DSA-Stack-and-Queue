@@ -1,0 +1,11 @@
+{
+  "name": "05_dsa_stack_and_queue",
+  "version": "1.0.0",
+  "description": "Exercises completed in the Thinkful Data Structures and Algorithms module on stacks and queues.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
