@@ -32,3 +32,5 @@ class Queue {
   //Remove items from the queue
   dequeue() {}
 }
+
+module.exports = Queue;
