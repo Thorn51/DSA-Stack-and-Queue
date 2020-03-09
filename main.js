@@ -18,10 +18,19 @@ class Stack {
     // Given empty stack place data at top
     if (this.top === null) {
       this.top = new _Node(data, null);
+      this.size++;
       return this.top;
     }
     // Given there is data already in stack
     const node = new _Node(data, this.top);
     this.top = node;
+    this.size++;
   }
 }
+
+const testStack = new Stack();
+
+testStack.push(10);
+testStack.push(20);
+
+console.log(testStack);
