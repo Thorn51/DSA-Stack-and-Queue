@@ -72,4 +72,6 @@ class Queue {
     this.last = null;
     this.size = 0;
   }
+
+  enqueue(data) {}
 }
