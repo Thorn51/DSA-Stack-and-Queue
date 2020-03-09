@@ -1,3 +1,4 @@
+// Create node class
 class _Node {
   constructor(data) {
     this.data = data;
@@ -5,6 +6,7 @@ class _Node {
   }
 }
 
+//Create queue class
 class Queue {
   constructor() {
     this.first = null;
@@ -30,10 +32,3 @@ class Queue {
   //Remove items from the queue
   dequeue() {}
 }
-
-let testQueue = new Queue();
-
-testQueue.enqueue(10);
-testQueue.enqueue(20);
-
-console.log(testQueue);
