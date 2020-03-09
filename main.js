@@ -26,11 +26,28 @@ class Stack {
     this.top = node;
     this.size++;
   }
+
+  //Look at the data in the stack
+  peek() {
+    if (this.top === null) {
+      console.log("The stack is empty");
+      return;
+    } else {
+      let node = this.top;
+
+      while (node) {
+        console.log(node.data);
+        node = node.next;
+      }
+    }
+  }
 }
 
 const testStack = new Stack();
 
 testStack.push(10);
 testStack.push(20);
+testStack.push(30);
+testStack.peek();
 
 console.log(testStack);
