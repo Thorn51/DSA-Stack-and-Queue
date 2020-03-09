@@ -55,13 +55,21 @@ class Stack {
   }
 }
 
-const testStack = new Stack();
+// const testStack = new Stack();
 
-testStack.push(10);
-testStack.push(20);
-testStack.push(30);
-testStack.push(40);
-testStack.pop();
-testStack.peek();
+// testStack.push(10);
+// testStack.push(20);
+// testStack.push(30);
+// testStack.push(40);
+// testStack.pop();
+// testStack.peek();
 
-console.log(testStack);
+// console.log(testStack);
+
+class Queue {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.size = 0;
+  }
+}
