@@ -27,10 +27,22 @@ class Stack {
     this.size++;
   }
 
+  //Remove last item added to stack
+  pop() {
+    if (this.top === null) {
+      console.log("Pop -> The stack is empty");
+      return;
+    }
+    const node = this.top;
+    this.top = node.next;
+    this.size--;
+    return node.data;
+  }
+
   //Look at the data in the stack
   peek() {
     if (this.top === null) {
-      console.log("The stack is empty");
+      console.log("Peek -> The stack is empty");
       return;
     } else {
       let node = this.top;
@@ -48,6 +60,8 @@ const testStack = new Stack();
 testStack.push(10);
 testStack.push(20);
 testStack.push(30);
+testStack.push(40);
+testStack.pop();
 testStack.peek();
 
 console.log(testStack);
