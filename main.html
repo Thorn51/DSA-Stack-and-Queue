@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>DSA - Stacks and Queues</title>
+  </head>
+  <body>
+    <h1>Stacks and Queues</h1>
+    <p></p>
+    <section class="examples">
+      <h2>Stack</h2>
+      <p>A stack is a data structure similar to a list with access restricted to only 1 end. It stores elements in a Last In First Out (LIFO) order.</p>
+      <h3>Stack Node</h3>
+      <pre>
+        <code>
+            class _Node {
+              constructor(value, next) {
+                
+                // The value stored in the node
+                this.value = value;
+                
+                // Stores address of the next node
+                this.next = next;
+              }
+            }
+        </code>
+      </pre>
+      <p class="note"><span class="bold">NOTE:</span> The node class is prefixed with an underscore. This indicates that the node class is a private class.</p>
+      <h3>Stack Class</h3>
+      <pre>
+        <code>
+            class Stack {
+                constructor () {
+
+                    // Tracks the last item added to the stack
+                    this.top = null;
+                    
+                    // Tracks the size of the stack
+                    this.size = 0; 
+                }
+            }
+        </code>
+      </pre>
+      <h3>Stack Methods</h3>
+      <p>The stack has two primary functions:</p>
+      <ul>
+          <li>push(): places data on the top of the stack</li>
+          <li>pop(): removes data from teh top of the stack</li>
+      </ul>
+      <pre>
+          <code>
+              ... 
+                push(value) {
+                    
+                    // If the stack is empty
+                    if(this.top === null) {
+                        this.top = new _Node(value, null)
+                        this.size++;
+                        return this.top
+                    }
+
+                    // If the stack already has nodes
+                    let node = new _Node(value, this.top)
+                    this.top = node
+                    this.size++;
+                }
+              ... 
+          </code>
+      </pre>
+      <pre>
+          <code>
+            ...
+            pop() {
+                
+                // Check if the stack is empty
+                if (this.top === null) {
+                    return null;
+                }
+            
+                // Change top of the stack to the next node
+                let node = this.top;
+                this.top = node.next;
+                return node.value;
+            }  
+            ... 
+          </code>
+      </pre>
+      <h2>Queue</h2>
+      <p>A queue is a data structure that models a First In First Out(FIFO) operation.</p>
+      <h4>Queue Node</h4>
+      <pre>
+        <code>
+            class _Node {
+              constructor(value) {
+
+                // The value stored in the node
+                this.value = value;
+                
+                // Stores address the next node in line
+                this.next = null;
+              }
+            }
+        </code>
+      </pre>
+      <h4>Queue Class</h4>
+      <pre>
+        <code>
+            ...
+                class Queue {
+                    constructor() {
+                    
+                    // Track the first item in the queue
+                    this.first = null;
+                    
+                    // Track the last item in the queue
+                    this.last = null;
+                    
+                    // Track the size of the queue 
+                    this.size = 0;
+                }
+            ...
+        </code>
+      </pre>
+      <h3>Queue Methods</h3>
+      <p>There are two main functions of the queue data structure</p>
+      <ul>
+          <li>enqueue(value): adds data to teh queue</li>
+          <li>dequeue(): removes the oldest data added to queue</li>
+      </ul>
+      <pre>
+          <code>
+              ...
+                enqueue(value) {
+                    // Create a new node to store the value
+                    let node = new _Node(value);
+                
+                    // If the node is the first to be added
+                    if (this.first === null) {
+                        this.first = node;
+                        this.size++;
+                    }
+                
+                    // Shift existing node in last
+                    if (this.last) {
+                        this.last.next = node;
+                    }
+                
+                    // Make the new node last in queue
+                    this.last = node;
+                    this.size++;
+                }
+              ...
+          </code>
+      </pre>
+      <pre>
+          <code>
+              ...
+                dequeue() {
+
+                    // Check if queue is empty
+                    if(this.first === null) {
+                    return null;
+                    }
+
+                    // Get the first node in the list
+                    let node = this.first
+                    
+                    // Shift the next node in the queue to first
+                    this.first = this.first.next
+                    
+                    // If the node is in the last position of the queue
+                    if(node === this.last) {
+                        this.last = null
+                    }
+                } 
+              ... 
+          </code>
+      </pre>
+    </section>
+    <section class="drills">
+      <h2>Drills</h2>
+      <h3>1. Create a linked stack class</h3>
+      <p class="question">Walk through the Stack class in the curriculum and understand it well. Then write a Stack class with its core functions (push, pop) from scratch.</p>
+      <pre>
+          <code>
+              class _Node {
+                  constructor(value, next) {
+                      this.value = value;
+                      this.next = next;
+                  }
+              }
+
+              class Stack {
+                  constructor() {
+                      this.top = null;
+                      this.size = 0;
+                  }
+
+                  push(value) {
+                      if(this.top === null) {
+                          this.top = new _Node(value, null);
+                          this.size++;
+                          return this.top;
+                      }
+                      let node = new _Node(value, this.last);
+                      this.top = node;
+                      size++;
+                  }
+
+                  pop() {
+                      if(this.top === null) {
+                          return null;
+                      }
+                      let node = this.top;
+                      this.top = node.next;
+                      size--;
+                      return node.value;
+                  }
+              }
+          </code>
+      </pre>
+      <h3>2. Useful methods for a stack</h3>
+      <p class="question">Using the Stack class above, implement the following helper functions outside of the class:</p>
+      <ul>
+          <li>peek(): allows you to look at the top of the stack without removing it
+              <pre>
+                  <code>
+                      ...
+                        peek() {
+
+                            // Check if the stack is empty
+                            if (this.top === null) {
+                                return null;
+                            }
+
+                            // Return the top of the stack
+                            return this.top;
+                        }
+                      ...
+                  </code>
+              </pre>
+          </li>
+          <li>isEmpty(): allows you to check if the stack is empty or not
+              <pre>
+                  <code>
+                      ...
+                        isEmpty() {
+                            if (this.top === null) {
+                                return true;
+                            }
+                            return false;
+                        } 
+                      ...
+                  </code>
+              </pre>
+          </li>
+          <li>display(): to display the stack - what is the 1st item in your stack?
+              <pre>
+                  <code>
+                      ... 
+                        display() {
+                            if (this.top === null) {
+                                return "Stack is empty";
+                            }
+                            let node = this.top;
+                            let nodeValues = "";
+                            while (node) {
+                                nodeValues += node.value + " ";
+                                node = node.next;
+                            }
+                            return nodeValues;
+                        }
+                      ...
+                  </code>
+              </pre>
+          </li>
+      </ul>
+      <h3>3. Check for palindromes using a stack</h3>
+      <p class="question">A palindrome is a word, phrase, or number that is spelled the same forward and backward. For example, “dad” is a palindrome; “A man, a plan, a canal: Panama” is a palindrome if you take out the spaces and ignore the punctuation; and 1,001 is a numeric palindrome. We can use a stack to determine whether or not a given string is a palindrome.</p>
+      <p>Write an algorithm that uses a stack to determine whether a given input is palindrome or not. Use the following template as a starting point.</p>
+      <pre>
+          <code>
+            function is_palindrome(s) {
+                s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+                // Your code goes here
+            }
+            
+            // True, true, true, false
+            console.log(is_palindrome("dad"));
+            console.log(is_palindrome("A man, a plan, a canal: Panama"));
+            console.log(is_palindrome("1001"));
+            console.log(is_palindrome("Tauhida"));
+          </code>
+      </pre>
+      <p class="answer"><span class="bold">Answer:</span> This one took some time to figure out. Once I got it, it makes a lot of sense to use a stack for this operation.</p>
+      <pre>
+        <code>
+          function isPalindrome(string) {
+            string = string.toLowerCase().replace(/\W/g, "");
+            let palindromeCharacters = new Stack();
+            let reverseString = "";
+            for (let i = 0; i < string.length; i++) {
+              palindromeCharacters.push(string[i]);
+            }
+            while (palindromeCharacters.top !== null) {
+              reverseString += palindromeCharacters.top.value;
+              palindromeCharacters.pop();
+            }
+            if (string !== reverseString) {
+              return false;
+            }
+            return true;
+          }
+        </code>
+      </pre>
+      <p class="note"><span class="bold">NOTE:</span> Time complexity is polynomial O(n^2). There is probably a way to get this linear with the use of built in methods.</p>
+      <h3>4. Matching parentheses in an expression</h3>
+      <p class="question">
+        A stack can be used to ensure that an arithmetic expression has balanced parentheses. Write a function that takes an arithmetic expression as an argument and returns true or false based on matching parenthesis. As a bonus provide a meaningful error message to the user as to what's missing. For example, you are missing a ( or missing a ")".
+      </p>
+      <p>For version 1, the parentheses you need to consider are ( and ). Finding a close parenthesis without an open parenthesis is an error (report the location of the close); reaching the end of the string while still "holding" an open parenthesis is also an error (report the location of the open).</p>
+      <p><span class="bold">Extension exercise:</span> Recognize 3 pairs of brackets: (), [], and {}. These must be correctly nested; "([)]" is incorrect, and should report an error at the ), stating that you were expecting a ] but found a ). If this is starting to look and sound very familiar, congratulations - you're beginning to write a simple language parser!</p>
+      <p><span class="bold">Extension extension exercise:</span> Also recognize 2 types of quote character: "" and ''. Inside quotes, brackets aren't counted at all - in fact, nothing is counted until you reach the corresponding close quote.</p>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <p class="answer"><span class="bold">Answer:</span></p>
+      <p class="note"><span class="bold">NOTE:</span></p>
+      <h3>5. Sort Stack</h3>
+      <p class="question">
+        Write a program to sort a stack such that the smallest items are on the top (in ascending order). You can use an additional stack, but you may not use any other data structure (such as an array, or linked list).
+      </p>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <p class="answer"><span class="bold">Answer:</span></p>
+      <p class="note"><span class="bold">NOTE:</span></p>
+      <h3>6. Create a queue using a singly linked list</h3>
+      <p class="question">
+        Walk through the Queue class in the curriculum and understand it well. Then write a Queue class with its core functions (enqueue(), dequeue()) from scratch.
+        <ul>
+            <li>Create a queue called starTrekQ and add Kirk, Spock, Uhura, Sulu, and Checkov to the queue.</li>
+            <li>Implement a peek() function outside of teh Queue class that lets you take a peek at what the first item in teh queue is.</li>
+            <li>Implement a isEmpty() function outside the Queue class that allows you to check if the queue is empty or not</li>
+            <li>Implement a display() function outside of the Queue class that lets you display what's in the queue.</li>
+            <li>Remove Spock from the queue and display the resulting queue.</li>
+        </ul>
+      </p>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <p class="answer"><span class="bold">Answer:</span></p>
+      <p class="note"><span class="bold">NOTE:</span></p>
+      <h3>7. Create a queue class using doubly linked list</h3>
+      <p class="question">Use the items listed in #6 and enqueue them to your queue.</p>
+      <ul>
+          <li>Check to see who is the first one on the queue?</li>
+      </ul>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <p class="answer"><span class="bold">Answer:</span></p>
+      <p class="note"><span class="bold">NOTE:</span></p>
+      <h3>8. Queue implementation using stack</h3>
+      <p class="question">
+        There are many ways to implement a queue. You have learned using singly linked list, and doubly linked list. Keeping the concept of a queue in mind, implement a queue using 2 stacks and no other data structure. (You are not allowed to use a doubly linked list or array. Use your stack implementation with a linked list from above to solve this problem.)
+      </p>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <p class="answer"><span class="bold">Answer:</span></p>
+      <p class="note"><span class="bold">NOTE:</span></p>
+      <h3>9. Square dance pairing</h3>
+      <p class="question">
+        As people come to the dance floor, they should be paired off as quickly as possible: man with woman, man with woman, all the way down the line. If several men arrive in a row, they should be paired in the order they came, and likewise if several women do. Maintain a queue of "spares" (men for whom you have no women yet, or vice versa), and pair them as appropriate.
+      </p>
+      <ul>
+          <li>F Jane</li>
+          <li>M Frank</li>
+          <li>M John</li>
+          <li>M Sherlock</li>
+          <li>F Madonna</li>
+          <li>M David</li>
+          <li>M Christopher</li>
+          <li>F Beyonce</li>
+      </ul>
+      <ul>
+          <li>Female dancer is Jane, and the male dancer is Frank</li>
+          <li>Femal dance is Madonna, and hte male dancer is John</li>
+          <li>Female dancer is Beyonce, and the male dancer is Sherlock</li>
+          <li>There are 2 male cancer waiting to dance</li>
+      </ul>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <h3>10. The Ophidian Bank</h3>
+      <p class="question">
+        At the Ophidian Bank, a single teller serves a long queue of people. New customers join the end of the queue, and the teller will serve a customer only if they have all of the appropriate paperwork. Write a representation of this queue; 25% of the time (random), a customer's paperwork isn't quite right, and it's back to the end of the queue. Show what a few minutes of the bank's lobby would look like.
+      </p>
+      <pre>
+        <code>
+        </code>
+      </pre>
+      <p class="answer"><span class="bold">Answer:</span></p>
+      <p class="note"><span class="bold">NOTE:</span></p>
+    </section>
+    <script type="module" src="stack.js"></script>
+    <script type='module' src="main.js"></script>
+  </body>
+</html>
