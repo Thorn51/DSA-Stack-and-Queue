@@ -1,7 +1,7 @@
-// Node Class -> creates the nodes for the stack or for the queue
+// Node Class -> Private calss for stack to create nodes
 class _Node {
-  constructor(data, next) {
-    this.data = data;
+  constructor(value, next) {
+    this.value = value;
     this.next = next;
   }
 }
@@ -9,50 +9,71 @@ class _Node {
 // Sack Class -> Creates stacks to add and remove nodes, LIFO
 class Stack {
   constructor() {
+    // Track the node on top of the stack
     this.top = null;
+    // Track the number of nodes in the stack
     this.size = 0;
   }
 
-  //Add item to the top of stack
-  push(data) {
-    // Given empty stack place data at top
-    if (this.top === null) {
-      this.top = new _Node(data, null);
+  // Insert a node on the top of the stack
+  push(value) {
+    // If the stack is empty
+    if (this.last === null) {
+      this.top = new _Node(value, null);
       this.size++;
       return this.top;
     }
-    // Given there is data already in stack
-    const node = new _Node(data, this.top);
+    // If the stack already has nodes
+    let node = new _Node(value, this.top);
     this.top = node;
     this.size++;
   }
 
-  //Remove last item added to stack
+  // Remove a node from the stack
   pop() {
+    // Check if the stack is empty
     if (this.top === null) {
-      console.log("Pop -> The stack is empty");
-      return;
+      return null;
     }
-    const node = this.top;
+
+    // Change top of the stack to the next node
+    let node = this.top;
     this.top = node.next;
     this.size--;
-    return node.data;
+    return node.value;
   }
 
-  //Look at the data in the stack
+  // Look at the top node
   peek() {
+    // Check if the stack is empty
     if (this.top === null) {
-      console.log("Peek -> The stack is empty");
-      return;
-    } else {
-      let node = this.top;
-
-      while (node) {
-        console.log(node.data);
-        node = node.next;
-      }
+      return null;
     }
+    // Return the top of the stack
+    return this.top;
+  }
+
+  // Check if the stack is empty
+  isEmpty() {
+    if (this.top === null) {
+      return true;
+    }
+    return false;
+  }
+
+  // Look at all the values in the stack
+  display() {
+    if (this.top === null) {
+      return "Stack is empty";
+    }
+    let node = this.top;
+    let nodeValues = "";
+    while (node) {
+      nodeValues += node.value + " ";
+      node = node.next;
+    }
+    return nodeValues;
   }
 }
 
-module.exports = Stack;
+export default Stack;
